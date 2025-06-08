@@ -4,6 +4,9 @@
 A full-stack application using **React**, **Spring Boot**, and **Spring AI** to transcribe uploaded audio files into text using OpenAI's Whisper model.
 
 ---
+# Demo
+![Demo](src/main/resources/static/demo.gif)
+___
 
 ## Project Setup
 
