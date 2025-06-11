@@ -1,0 +1,6 @@
+com/audio/transcribe/controllers/TranscriptionController.class
+com/audio/transcribe/repositories/NoteRepository.class
+com/audio/transcribe/controllers/NoteController.class
+com/audio/transcribe/AudioTranscribeApplication.class
+com/audio/transcribe/entity/Note.class
+com/audio/transcribe/WebConfig.class
