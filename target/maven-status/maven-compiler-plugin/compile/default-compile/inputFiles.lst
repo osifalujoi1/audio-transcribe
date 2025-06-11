@@ -1,0 +1,6 @@
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/AudioTranscribeApplication.java
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/WebConfig.java
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/controllers/NoteController.java
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/controllers/TranscriptionController.java
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/entity/Note.java
+/Users/peaceosifalujo/Documents/Software-Projects/audio-transcribe/src/main/java/com/audio/transcribe/repositories/NoteRepository.java

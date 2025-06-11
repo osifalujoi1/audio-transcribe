@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Particles from './Particles';
 
+
 const AudioUploader = () => {
     useEffect(() => {
                 const particlesContainer = document.getElementById('particles-container');
@@ -91,9 +92,10 @@ const AudioUploader = () => {
             }, []);
 
     const [file, setFile] = useState(null);
-    const [transcription, setTranscription] = useState("result will appear here...");
+    const [transcription, setTranscription] = useState('Result appears here');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [download, setDownload] = useState(false);
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -109,13 +111,14 @@ const AudioUploader = () => {
         formData.append('file', file);
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:8080/api/transcribe",
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/transcribe`,
                 formData,
                 {headers: {
                     'Content-Type':'multipart/form-data',
                 }}
             );
             setTranscription(response.data);
+            setDownload(true);
         } catch (error) {
             setError("Failed to transcribe audio.")
         } finally {
@@ -124,6 +127,26 @@ const AudioUploader = () => {
         
     };
 
+    const handleDownload = () => {
+        if (!download){
+            alert("Please provide both a title and transcription.");
+            return;
+        }
+        const filename = "note.txt";
+        const blob = new Blob([transcription], {type: "text/plain"});
+        const href = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    }
+
+
     let displayedTranscription = "";
 
     if (loading) displayedTranscription = "Loading...";
@@ -131,10 +154,10 @@ const AudioUploader = () => {
     else if (transcription) displayedTranscription = transcription;
     if (!transcription) displayedTranscription = "No audio to transcribe";
 
+
     return (
 
-        <div className="w-full">
-            
+        <div>
             <div>
                 <div className="gradient-background">
                     <div className="gradient-sphere sphere-1"></div>
@@ -168,7 +191,9 @@ const AudioUploader = () => {
                 <div className="content-container">
                     <p className="text-xl font-semibold text-center">Transcription Result</p>
                     <div className="bg-black/70 text-white-700 border border-gray-300 rounded-lg p-4 flex items-center justify-center text-center min-h-[200px] whitespace-pre-wrap shadow-md">{displayedTranscription}</div>
+                    
                 </div>
+                <button type="submit" onClick={handleDownload} className="text-blue-600">Download Note</button>
             </div>
         </div>
     );
